@@ -3,8 +3,8 @@ from random import uniform
 from math import *
 
 
-# Alea
-def alea(v, pMin, pMax):
+# Generate and return a random number with a value between pMin and pMax
+def get_random_number(v, pMin, pMax):
     return v * (1 + uniform(pMin, pMax) / 100)
 
 
@@ -17,20 +17,20 @@ def arbre(generation, longueur, branches, epaisseur, croissance=1.0, niveau=1):
     aleaMax = niveau * 20 * croissance
     branchesLocales = max(round(uniform(branches - 2, branches + 2 + niveau * 2)), 2)
     if epaisseur >= 1:
-        pensize(alea(epaisseur, -20 * croissance, 20 * croissance))
+        pensize(get_random_number(epaisseur, -20 * croissance, 20 * croissance))
     if generation <= 0:
         pencolor("green")
-        fd(alea(longueur, aleaMin, aleaMax))
+        fd(get_random_number(longueur, aleaMin, aleaMax))
     else:
         # trunc
         pencolor("#722904")
-        fd(alea(longueur, aleaMin, aleaMax))
+        fd(get_random_number(longueur, aleaMin, aleaMax))
         angle = 100 / (branchesLocales - 1)
         # branches
-        lt(alea(50, -20, 20))
+        lt(get_random_number(50, -20, 20))
         for i in range(branchesLocales):
             arbre(generation - 1, longueur / 2.1, branches, epaisseur / 2.7, croissance, niveau + 1)
-            rt(alea(angle, -20, +20))
+            rt(get_random_number(angle, -20, +20))
     goto(x, y)
     setheading(h)
     pensize(e)
